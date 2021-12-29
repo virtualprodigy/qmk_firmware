@@ -8,8 +8,8 @@ enum ctrl_keycodes {
     DBG_KBD,               //DEBUG Toggle Keyboard Prints
     DBG_MOU,               //DEBUG Toggle Mouse Prints
     MD_BOOT,               //Restart into bootloader after hold timeout
-    LOCK_MAC,
-    VRTAP_LAYER_CHECK,              //Macro to lock mac
+    LOCK_MAC,              //Lock mac
+    VRTAP_LAYER_CHECK,     //Lighting to display current layer         
 };
 
 
@@ -138,11 +138,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 //blink leds 
 
-//custom lighting layers
-const rgblight_segment_t PROGMEM _blink_layer_level_layer= RGBLIGHT_LAYER_SEGMENTS( {1, 20, HSV_PURPLE} );
+// //custom lighting layers
+const rgblight_segment_t PROGMEM _blink_layer_level_layer[]= RGBLIGHT_LAYER_SEGMENTS( {6, 4, HSV_PURPLE} );
 
 const rgblight_segment_t* const PROGMEM _rgb_layers[] =
     RGBLIGHT_LAYERS_LIST(_blink_layer_level_layer);
+
+// const rgblight_segment_t PROGMEM _yes_layer[] = RGBLIGHT_LAYER_SEGMENTS( {9, 6, HSV_PURPLE} );
+// const rgblight_segment_t PROGMEM _no_layer[] = RGBLIGHT_LAYER_SEGMENTS( {9, 6, HSV_RED} );
+
+// const rgblight_segment_t* const PROGMEM _rgb_layers[] =
+//     RGBLIGHT_LAYERS_LIST( _yes_layer, _no_layer );
 
 void keyboard_post_init_user(void) {
     rgblight_layers = _rgb_layers;
@@ -166,3 +172,5 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
     }
 }
+
+
