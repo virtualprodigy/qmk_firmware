@@ -19,15 +19,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+
+
+
+//Keybard seems to only support  matrix not rgb
 //define lighting layers
 #define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
 #define RGBLIGHT_LAYERS
-
 //number of LEDs??
 #define RGBLED_NUM 12
-
 // Allows for lighting layer blink
 #define RGBLIGHT_LAYER_BLINK
-
 // Retain lighting brightness 
 #define RGBLIGHT_LAYERS_RETAIN_VAL

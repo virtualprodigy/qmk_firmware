@@ -144,12 +144,6 @@ const rgblight_segment_t PROGMEM _blink_layer_level_layer[]= RGBLIGHT_LAYER_SEGM
 const rgblight_segment_t* const PROGMEM _rgb_layers[] =
     RGBLIGHT_LAYERS_LIST(_blink_layer_level_layer);
 
-// const rgblight_segment_t PROGMEM _yes_layer[] = RGBLIGHT_LAYER_SEGMENTS( {9, 6, HSV_PURPLE} );
-// const rgblight_segment_t PROGMEM _no_layer[] = RGBLIGHT_LAYER_SEGMENTS( {9, 6, HSV_RED} );
-
-// const rgblight_segment_t* const PROGMEM _rgb_layers[] =
-//     RGBLIGHT_LAYERS_LIST( _yes_layer, _no_layer );
-
 void keyboard_post_init_user(void) {
     rgblight_layers = _rgb_layers;
 }
@@ -158,7 +152,7 @@ void keyboard_post_init_user(void) {
 // after the flag has been flipped...
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case NK_OFF:
+        case VRTAP_LAYER_CHECK:
 	        if(layer_state_is(1)){
     			rgblight_blink_layer_repeat(0, 500, 1);
 	        }else if(layer_state_is(2)){
