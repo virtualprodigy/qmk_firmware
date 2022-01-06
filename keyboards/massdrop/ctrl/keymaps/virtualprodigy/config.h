@@ -17,18 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#pragma once
+// #pragma once
 
+// #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_BREATHING // Sets the default mode, if none has been set
+// #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200 // limits maximum brightness of LEDs to 200 out of 255. If not defined maximum brightness is set to 255
+// #define RGB_MATRIX_STARTUP_VAL 100  // Sets the default brightness value, if none has been set. MAX -> RGB_MATRIX_MAXIMUM_BRIGHTNESS
+ 
 
-
-
-//Keybard seems to only support  matrix not rgb
-//define lighting layers
-#define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
-#define RGBLIGHT_LAYERS
-//number of LEDs??
-#define RGBLED_NUM 12
-// Allows for lighting layer blink
-#define RGBLIGHT_LAYER_BLINK
-// Retain lighting brightness 
-#define RGBLIGHT_LAYERS_RETAIN_VAL

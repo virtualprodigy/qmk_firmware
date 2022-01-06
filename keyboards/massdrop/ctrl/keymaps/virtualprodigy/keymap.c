@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [1] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            KC_MUTE, LOCK_MAC, _______, \
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   KC_MPLY, KC_MSTP, KC_VOLU, \
-        _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_SAI, _______, U_T_AUTO,U_T_AGCR,_______, _______, _______, _______, _______,   KC_MPRV, KC_MNXT, KC_VOLD, \
+        _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_SAI, _______, U_T_AUTO,U_T_AGCR,_______, _______, _______, _______, _______,   KC_MPRV, KC_MFFD, KC_VOLD, \
         _______, RGB_RMOD,RGB_VAD, RGB_MOD, RGB_HUD, RGB_SAD, _______, _______, _______, _______, _______, _______, _______, \
         _______, RGB_TOG, _______, _______, _______, MD_BOOT, NK_TOGG, _______, _______, _______, _______, _______,                              _______, \
         _______, _______, _______,                   VRTAP_LAYER_CHECK,                            _______, _______, TG(2), _______,            _______, _______, _______ \
@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
-
+rgb_matrix_mode_noeeprom(RGB_MATRIX_JELLYBEAN_RAINDROPS);
 };
 
 // Runs constantly in the background, in a loop.
@@ -136,17 +136,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-//blink leds 
 
-// //custom lighting layers
-const rgblight_segment_t PROGMEM _blink_layer_level_layer[]= RGBLIGHT_LAYER_SEGMENTS( {6, 4, HSV_PURPLE} );
-
-const rgblight_segment_t* const PROGMEM _rgb_layers[] =
-    RGBLIGHT_LAYERS_LIST(_blink_layer_level_layer);
-
-void keyboard_post_init_user(void) {
-    rgblight_layers = _rgb_layers;
-}
 
 // Note we user post_process_record_user because we want the state
 // after the flag has been flipped...
@@ -154,13 +144,15 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case VRTAP_LAYER_CHECK:
 	        if(layer_state_is(1)){
-    			rgblight_blink_layer_repeat(0, 500, 1);
+    			// layer 1 action
 	        }else if(layer_state_is(2)){
-    			rgblight_blink_layer_repeat(0, 500, 2);
+    			// layer 2 action
+                rgb_matrix_set_color_all(75,0,130);
 	        }else{
 		        //default layer or out of range some how
 		        //no-op
-    			rgblight_blink_layer_repeat(0, 4000, 1);
+    			// layer (default) action
+                // rgb_matrix_mode(ENABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS);
 	        }
         
             break;
