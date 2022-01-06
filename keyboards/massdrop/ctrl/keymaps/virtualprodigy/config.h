@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // #pragma once
 
-// #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_BREATHING // Sets the default mode, if none has been set
-// #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200 // limits maximum brightness of LEDs to 200 out of 255. If not defined maximum brightness is set to 255
-// #define RGB_MATRIX_STARTUP_VAL 100  // Sets the default brightness value, if none has been set. MAX -> RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_JELLYBEAN_RAINDROPS // Sets the default mode, if none has been set
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 250 // limits maximum brightness of LEDs to 200 out of 255. If not defined maximum brightness is set to 255
+#define RGB_MATRIX_STARTUP_VAL 250  // Sets the default brightness value, if none has been set. MAX -> RGB_MATRIX_MAXIMUM_BRIGHTNESS
  
 

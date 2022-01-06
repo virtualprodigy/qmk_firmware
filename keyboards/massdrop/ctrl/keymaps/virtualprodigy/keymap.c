@@ -47,6 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
 rgb_matrix_mode_noeeprom(RGB_MATRIX_JELLYBEAN_RAINDROPS);
+
 };
 
 // Runs constantly in the background, in a loop.
@@ -143,16 +144,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case VRTAP_LAYER_CHECK:
-	        if(layer_state_is(1)){
+	        if(layer_state_is(1)){  
     			// layer 1 action
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
 	        }else if(layer_state_is(2)){
     			// layer 2 action
-                rgb_matrix_set_color_all(75,0,130);
+                // rgb_matrix_set_color_all(75,0,130);
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
 	        }else{
 		        //default layer or out of range some how
 		        //no-op
-    			// layer (default) action
-                // rgb_matrix_mode(ENABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS);
+    			// layer (default) action;
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_JELLYBEAN_RAINDROPS);
 	        }
         
             break;
