@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_SAI, _______, U_T_AUTO,U_T_AGCR,_______, _______, _______, _______, _______,   KC_MPRV, KC_MFFD, KC_VOLD, \
         _______, RGB_RMOD,RGB_VAD, RGB_MOD, RGB_HUD, RGB_SAD, _______, _______, _______, _______, _______, _______, _______, \
         _______, RGB_TOG, _______, _______, _______, MD_BOOT, NK_TOGG, _______, _______, _______, _______, _______,                              _______, \
-        _______, _______, _______,                   VRTAP_LAYER_CHECK,                            _______, _______, TG(2), _______,            _______, _______, _______ \
+        _______, _______, _______,                   _______,                            _______, _______, TG(2), _______,            _______, _______, _______ \
     ),
     
     [2] = LAYOUT(
@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   RSA(KC_DEL),  RSA(KC_END),  RSA(KC_PGDN), \
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
         _______, _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______, _______,                              _______, \
-        _______, _______, _______,                   VRTAP_LAYER_CHECK,                            _______, _______, TG(2), _______,            _______, _______, _______ \
+        _______, _______, _______,                   _______,                            _______, KC_NO, TG(2), _______,            _______, _______, _______ \
     ),
     
 };
@@ -143,22 +143,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // after the flag has been flipped...
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case VRTAP_LAYER_CHECK:
-	        if(layer_state_is(1)){  
-    			// layer 1 action
+        case MO(1):
+            if(layer_state_is(1)){  
+                // layer 1 action (pressed layer 1 toggle) 
                 rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-	        }else if(layer_state_is(2)){
-    			// layer 2 action
-                // rgb_matrix_set_color_all(75,0,130);
+            }else if(layer_state_is(0)){  
+              // layer 0 action (released layer 1 toggle) 
+              rgb_matrix_mode_noeeprom(RGB_MATRIX_JELLYBEAN_RAINDROPS);
+            }
+        break;
+
+        case TG(2):
+            if(layer_state_is(2)){
+                // layer 2 action (toggled on layer 2) 
                 rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
-	        }else{
-		        //default layer or out of range some how
-		        //no-op
-    			// layer (default) action;
+            }else if(layer_state_is(0)){
+                //layer 0 action (toggled off layer 2)
                 rgb_matrix_mode_noeeprom(RGB_MATRIX_JELLYBEAN_RAINDROPS);
-	        }
-        
-            break;
+            }
+        break;
+
     }
 }
 
