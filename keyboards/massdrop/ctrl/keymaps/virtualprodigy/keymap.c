@@ -46,7 +46,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
-rgb_matrix_mode_noeeprom(RGB_MATRIX_JELLYBEAN_RAINDROPS);
+    eeconfig_init();
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_JELLYBEAN_RAINDROPS);
 
 };
 
@@ -146,17 +147,16 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
         case MO(1):
             if(layer_state_is(1)){  
                 // layer 1 action (pressed layer 1 toggle) 
-                rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR); // set the effect then the color
             }else if(layer_state_is(0)){  
               // layer 0 action (released layer 1 toggle) 
               rgb_matrix_mode_noeeprom(RGB_MATRIX_JELLYBEAN_RAINDROPS);
             }
         break;
-
         case TG(2):
             if(layer_state_is(2)){
                 // layer 2 action (toggled on layer 2) 
-                rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR); // set the effect then the color
             }else if(layer_state_is(0)){
                 //layer 0 action (toggled off layer 2)
                 rgb_matrix_mode_noeeprom(RGB_MATRIX_JELLYBEAN_RAINDROPS);
@@ -166,4 +166,19 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+//called after setting a matrix effect (rgb_matrix_mode_noeeprom())
+void rgb_matrix_indicators_kb(void) {
+    if(layer_state_is(0)){  
+      // layer 0 action (released layer 1 toggle) 
+      // effect will handle setting color 
+    } else if(layer_state_is(1)){  
+        // layer 1 action (pressed layer 1 toggle) 
+        // effect was set in post_process_record_user, now set the color  
+        rgb_matrix_set_color_all(0,255,0);
+    }else if(layer_state_is(2)){
+        // layer 2 action (toggled on layer 2) 
+        rgb_matrix_set_color_all(255,0,0); 
+    }
+
+}
 
